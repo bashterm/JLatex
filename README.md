@@ -1,67 +1,45 @@
+*This is a work in progress and a fork of the original code.*
+
 # JLaTeX
 A Java Library that allows interfacing with the LaTeX document preparation system. Please note that this library __does not__ handle compilation. It only provides an interface for generating LaTeX code.
 
-## How To Use
+In order to create a document, at bare minimum, the following is necessary:
 
-Download the src/JLatex Folder. Put it in the same folder as your source code and you should be able to 
-```java
-import JLatex.*;
-```
-## Example
-
-A simple use of the library could be:
-
-```java
-import java.util.ArrayList;
-import java.util.Arrays;
-import JLatex.*;
-public class JLatexTest {
-	public static void main(String[] args){
-		@SuppressWarnings("unchecked")
-		LatexDoc exm = new LatexDoc("exam","Foobar","May 2017","Aidan Sciortino",null,new ArrayList<String>(Arrays.asList("12pt","addpoints")));
-		
-		LatexSection intro = new LatexSection("Introduction");
-		intro.addContents("Lorem Ipsum Dolor");
-		examQuestion q1 = new examQuestion("What is the solution to $1x+2y=4$?", 10);
-		examQuestion q2 = new examQuestion("What is the solution to $\\int_1^3(3x+2)dx$?",20);
-		questionSet qs = new questionSet();
-		qs.addQ(q1);
-		qs.addQ(q2);
-		exm.addContent(intro);
-		exm.addContent(qs);
-		System.out.print(exm.toLatexCode());
-		exm.toLatexFile("test");
-	}
-}
-class questionSet extends LatexContent{
-	private ArrayList<examQuestion> questions = new ArrayList();
-	public void addQ(examQuestion q){
-		questions.add(q);
-	}
-	public String toLatexCode() {
-		String out = "";
-		out += "\\begin{questions}\n";
-		for(examQuestion q : questions){
-			out += q.toLatexCode();
-		}
-		out += "\\end{questions}";
-		return out;
-	}
+	// Build a usepackage
+	LatexPackage inputenc = new LatexPackage()
+			.addOption("utf8")
+			.name("inputenc");
 	
-}
-class examQuestion extends LatexContent {
-	private String question;
-	private int points;
-	public examQuestion(String question, int points){
-		this.question = question;
-		this.points = points;
-	}
-	public String toLatexCode() {
-		String out = "";
-		out += "\\question[" + points + "]" + question + "\n\n";
-		return out;
-	}
+	// Built the title content
+	LatexText title = new LatexText()
+			.content("The title");
 	
-}
-```
+	// Build the author content
+	LatexText author = new LatexText()
+			.content("Author");
+	
+	// Build the preamble
+	LatexPreamble preamble = new LatexPreamble()
+			.className("report")
+			.addTitleContent(title)
+			.addAuthorContent(author)
+			.addPackage(inputenc);
+	
+	// Build the first paragraph content
+	LatexText paragraphContent = new LatexText()
+			.content("This is a sample document");
+	
+	// Build the first paragraph
+	LatexParagraph paragraph = new LatexParagraph()
+			.addContent(paragraphContent);
+	
+	// Build the document
+	LatexDocument document = new LatexDocument()
+			.preamble(preamble)
+			.addContent(paragraph);
+	
+	// Print the document
+	System.out.println(document.write());
+	
 
+There are more samples in the __jlatex.samples__ module.
