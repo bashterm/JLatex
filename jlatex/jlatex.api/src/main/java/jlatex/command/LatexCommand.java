@@ -28,7 +28,7 @@ public abstract class LatexCommand<T> implements LatexContent
 	 * @param name Name of the command
 	 * @param parameters Optional list of parameters to be added to the command.
 	 */
-	public LatexCommand(String name, LatexCommandParameter<?>... parameters)
+	protected LatexCommand(String name, LatexCommandParameter<?>... parameters)
 	{
 		this(name, false, parameters);
 	}
@@ -40,7 +40,7 @@ public abstract class LatexCommand<T> implements LatexContent
 	 * @param addNewLine If true, new line character(s) will be rendered into the end of the command
 	 * @param parameters Optional list of parameters to be added to the command.
 	 */
-	public LatexCommand(String name, boolean addNewLine, LatexCommandParameter<?>... parameters)
+	protected LatexCommand(String name, boolean addNewLine, LatexCommandParameter<?>... parameters)
 	{
 		this.addNewLine = addNewLine;
 		this.name = name;
@@ -78,9 +78,9 @@ public abstract class LatexCommand<T> implements LatexContent
 	{
 		writer.printf("\\%s", name);
 
-		parameters.forEach(param -> {
-			param.write(writer);
-		});
+		parameters.forEach(param -> 
+			param.write(writer)
+		);
 
 		if (addNewLine)
 		{

@@ -107,9 +107,9 @@ public class LatexLongTable extends LatexBlock<LatexLongTable, LatexContent>
 
 			LatexContentRow headerRow = new LatexContentRow();
 
-			columnSpecifications.getColumnSpecifications().forEach(s -> {
-				headerRow.addColumn(new LatexColumn().addContent(new LatexTextBold().addContent(s.getTitle())));
-			});
+			columnSpecifications.getColumnSpecifications().forEach(s -> 
+				headerRow.addColumn(new LatexColumn().addContent(new LatexTextBold().addContent(s.getTitle())))
+			);
 
 			contents.add(new LatexHline());
 			contents.add(headerRow);

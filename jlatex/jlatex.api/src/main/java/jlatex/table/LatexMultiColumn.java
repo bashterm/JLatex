@@ -46,12 +46,14 @@ public class LatexMultiColumn extends LatexColumn
 		return this;
 	}
 
+	@Override
 	public LatexMultiColumn addContent(LatexContent content)
 	{
 		this.content.addContent(content);
 		return this;
 	}
 
+	@Override
 	public LatexMultiColumn addContents(List<LatexContent> contents)
 	{
 		this.content.addContents(contents);

@@ -63,22 +63,6 @@ public class LatexTable extends LatexBlock<LatexTable, LatexContent>
 		this.caption.addLongTextContent(content);
 		return this;
 	}
-	//
-	// public LatexCellPosition getPosition()
-	// {
-	// return positionModifiers.getEnumValue();
-	// }
-	//
-	// public void setPosition(LatexCellPosition position)
-	// {
-	// this.positionModifiers.setValue(position);
-	// }
-	//
-	// public LatexTable position(LatexCellPosition position)
-	// {
-	// this.positionModifiers.setValue(position);
-	// return this;
-	// }
 
 	public String getTableModifiers()
 	{

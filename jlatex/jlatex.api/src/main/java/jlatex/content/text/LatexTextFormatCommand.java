@@ -28,7 +28,7 @@ public abstract class LatexTextFormatCommand<T> extends LatexCommand<LatexTextFo
 	 * @param name Name of command
 	 * @param parameters Optional additional parameters
 	 */
-	public LatexTextFormatCommand(String name, LatexCommandParameter<?>... parameters)
+	protected LatexTextFormatCommand(String name, LatexCommandParameter<?>... parameters)
 	{
 		super(name, parameters);
 		super.addParameter(contentParameter);

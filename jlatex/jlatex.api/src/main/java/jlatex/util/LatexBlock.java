@@ -49,9 +49,7 @@ public abstract class LatexBlock<T, C extends LatexContent> implements LatexCont
 	{
 		beginBlock.write(writer);
 
-		getContents().forEach(content -> {
-			content.write(writer);
-		});
+		getContents().forEach(content -> content.write(writer));
 
 		endBlock.write(writer);
 	}
