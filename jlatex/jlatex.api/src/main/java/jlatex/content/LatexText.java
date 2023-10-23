@@ -16,10 +16,6 @@ public class LatexText implements LatexContent
 	private String text = "";
 	private boolean escapeCharacters = true;
 
-	public LatexText()
-	{
-	}
-
 	@Override
 	public boolean isEmpty()
 	{
@@ -87,13 +83,13 @@ public class LatexText implements LatexContent
 		// Likely there is a static map that can be used instead of a hard-coded switch statement
 		switch (character)
 		{
-			case 'Ş':
+			case '\u02dc':
 			{
 				target.append("\\c{S}");
 				break;
 			}
 
-			case 'ș':
+			case '\u2122':
 			{
 				target.append("\\c{S}");
 				break;
@@ -108,11 +104,14 @@ public class LatexText implements LatexContent
 			case '}':
 			{
 				target.append("\\");
+				target.append((char) character);
+				break;
 			}
 
 			default:
 			{
 				target.append((char) character);
+				break;
 			}
 		}
 	}
